@@ -6,27 +6,29 @@
 //
 
 /**
-     Unit test cases for Mock APi manager, Api manager  JsonDecoder , Payload data , FruitsAPiInteractor and View Model
-      For all the cases of invalid resposne code, invalid data in resposne, missing parameter in response and as well as success cases.
+ Unit test cases for Mock APi manager, Api manager  JsonDecoder , Payload data , FruitsAPiInteractor and View Model
+ For all the cases of invalid resposne code, invalid data in resposne, missing parameter in response and as well as success cases.
  */
 
 import XCTest
+import Combine
+
 @testable import FruitsiOSApp
 
-class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
+class ApiManager_ApiInteractor_ApiPayload_ViewModelTests: XCTestCase,PayLoadFormat {
     
     var mockApiManager:MockApiManager?
     var apiModule:FruitsAPIModuleProtocol?
     var apiInteractor:FruitsApiInteractorProtocol?
-  //  var fruitsViewModel: FruitsViewModelProtocol!
+    //  var fruitsViewModel: FruitsViewModelProtocol!
     var fruitsViewModel: FruitsViewModel!
-
+    
     override func setUp() {
         super.setUp()
         mockApiManager = MockApiManager()
         apiModule = FruitsAPIModule()
     }
-
+    
     override func tearDown() {
         mockApiManager = nil
         apiModule = nil
@@ -36,9 +38,9 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
     // MARK: - APIManager Unit testcases with Mock data
     
     func test_mock_ApiManager_success_fruit_data_response() {
-       
-       apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType: FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
-    
+        
+        apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType: FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+        
         let payload = formatGetPayload(module: apiModule!)
         
         mockApiManager?.getFruitsInfo(payload: payload!, completion: { resultData in
@@ -48,7 +50,7 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
                 let fruitsCount:Int = data.fruits!.count
                 XCTAssertEqual(fruitsCount , 9)
             case .failure(let error):
-               XCTAssertNil(error)
+                XCTAssertNil(error)
             }
         })
     }
@@ -169,12 +171,12 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
     func test_ApiInteractor_with_Mock_Api_Resposne() {
         
         let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
-      
+        
         apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: mockApiManager!)
         apiInteractor?.getFruitDataResponse(completion: { result, error in
             XCTAssertNil(error)
             XCTAssertNotNil(result)
-           
+            
             XCTAssertEqual( result![0].type, "apple")
             XCTAssertEqual( result![0].price, 149)
             XCTAssertEqual( result![0].weight, 120)
@@ -262,7 +264,7 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
         let mappedDataForView:[FruitResponseProtocol]! = fruitsViewModel.mapToViewModelProtocol(fruitsData: fruitsViewModel.fruitInfo)
         
         XCTAssertNil(mappedDataForView)
-      
+        
         XCTAssertEqual(fruitsViewModel.error?.localizedDescription, "The data couldn’t be read because it isn’t in the correct format.")
     }
     
@@ -284,7 +286,7 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
         let mappedDataForView:[FruitResponseProtocol]! = fruitsViewModel.mapToViewModelProtocol(fruitsData: fruitsViewModel.fruitInfo)
         
         XCTAssertNil(mappedDataForView)
-      
+        
         XCTAssertEqual(fruitsViewModel.error?.localizedDescription, "The data couldn’t be read because it isn’t in the correct format.")
     }
     
@@ -305,7 +307,7 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
         XCTAssertNil(fruitsViewModel.fruitInfo)
         let mappedDataForView:[FruitResponseProtocol]! = fruitsViewModel.mapToViewModelProtocol(fruitsData: fruitsViewModel.fruitInfo)
         XCTAssertNil(mappedDataForView)
-       
+        
         XCTAssertEqual(fruitsViewModel.error?.localizedDescription, NetworkError.responseError.localizedDescription)
     }
     
@@ -347,32 +349,82 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
         XCTAssertEqual(fruitsViewModel.error?.localizedDescription, NetworkError.inValidData.localizedDescription)
     }
     
+    func test_ViewModel_Sink_WithData_ForView() {
+        
+        let expect = expectation(description: "API response completion")
+        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+        
+        let mockResposne =  HTTPURLResponse(url:URL.init(string: "https://foo.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)
+        mockApiManager = MockApiManager(false, withMockData: "{\"fruit\":[{\"type\":\"apple\", \"price\":149, \"weight\":120}]}", mockResposne: mockResposne!)
+        
+        fruitsViewModel = FruitsViewModel.init(apiModule: apiModule, apiManager: mockApiManager!)
+        fruitsViewModel?.getFruitList()
+        
+        var anyCancelable = Set<AnyCancellable>()
+        fruitsViewModel.dataForViewPub
+            .receive(on: DispatchQueue.main)
+            .sink {(result) in
+                expect.fulfill()
+                XCTAssertNotNil(result)
+                XCTAssertEqual( result![0].type, "apple")
+                XCTAssertEqual( result![0].price, 149)
+                XCTAssertEqual( result![0].weight, 120)
+            }
+            .store(in: &anyCancelable)
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_ViewModel_Sink_WithError_ForView() {
+        
+        let expect = expectation(description: "API response completion")
+        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+        
+        let mockResposne =  HTTPURLResponse(url:URL.init(string: "https://foo.com")!, statusCode: 400, httpVersion: nil, headerFields: nil)
+        mockApiManager = MockApiManager(false, withMockData: "{\"fruit\":[{\"type\":\"apple\", \"price\":149, \"weight\":120}]}", mockResposne: mockResposne!)
+        
+        fruitsViewModel = FruitsViewModel.init(apiModule: apiModule, apiManager: mockApiManager!)
+        fruitsViewModel?.getFruitList()
+        
+        var anyCancelable = Set<AnyCancellable>()
+        fruitsViewModel.errorPub
+            .receive(on:DispatchQueue.main)
+            .sink { (error) in
+                expect.fulfill()
+                XCTAssertNotNil(error)
+                XCTAssertEqual(error?.localizedDescription, NetworkError.responseError.localizedDescription)
+            }
+            .store(in: &anyCancelable)
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     // MARK: - Unit test case for Live ApiManager from Interactor
     
-   func test_Live_success_ApiManagerFromApiInteractor() {
-       
-       let expect = expectation(description: "API response completion")
-      
-       let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
-     
-       apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
-       apiInteractor?.getFruitDataResponse(completion: { result, error in
-           expect.fulfill()
-           XCTAssertNotNil(result)
-           XCTAssertNil(error)
-           XCTAssertGreaterThan(result!.count, 0)
-       })
-
-       waitForExpectations(timeout: 40, handler: nil)
-       
+    func test_Live_success_ApiManagerFromApiInteractor() {
+        
+        let expect = expectation(description: "API response completion")
+        
+        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+        
+        apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
+        apiInteractor?.getFruitDataResponse(completion: { result, error in
+            expect.fulfill()
+            XCTAssertNotNil(result)
+            XCTAssertNil(error)
+            XCTAssertGreaterThan(result!.count, 0)
+        })
+        
+        waitForExpectations(timeout: 40, handler: nil)
+        
     }
     
     func test_Live_failure_ApiManagerFromApiInteractor() {
         
         let expect = expectation(description: "API response completion")
-       
+        
         let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: nil)
-      
+        
         apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
         apiInteractor?.getFruitDataResponse(completion: { result, error in
             expect.fulfill()
@@ -380,7 +432,64 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
             XCTAssertNotNil(error)
         })
         waitForExpectations(timeout: 40, handler: nil)
-     }
+    }
     
-
+    // MARK: - Unit test case for Mock ApiManager from FruitsListViewController end to end
+    
+    func test_using_mock_api_ViewModel_Binding_with_FruitListViewController_with_data_Sucess() {
+        
+        let expect = expectation(description: "API response completion")
+        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+        
+        let mockResposne =  HTTPURLResponse(url:URL.init(string: "https://foo.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)
+        mockApiManager = MockApiManager(false, withMockData: "{\"fruit\":[{\"type\":\"apple\", \"price\":149, \"weight\":120}]}", mockResposne: mockResposne!)
+        
+        let vc = FruitsListViewController()
+        let vm = FruitsViewModel.init(apiModule: apiModule, apiManager: mockApiManager!)
+        vc.viewModelProtocol = vm
+        vc.viewModelProtocol!.getFruitList()
+        
+        var anyCancelable = Set<AnyCancellable>()
+        vc.viewModelProtocol!.dataForViewPub
+            .receive(on: DispatchQueue.main)
+            .sink {(result) in
+                expect.fulfill()
+                XCTAssertNotNil(result)
+                XCTAssertEqual( result![0].type, "apple")
+                XCTAssertEqual( result![0].price, 149)
+                XCTAssertEqual( result![0].weight, 120)
+            }
+            .store(in: &anyCancelable)
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    
+    func test_using_mock_api_ViewModel_Binding_with_FruitListViewController_with_Error() {
+        
+        let expect = expectation(description: "API response completion")
+        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+        
+        let mockResposne =  HTTPURLResponse(url:URL.init(string: "https://foo.com")!, statusCode: 400, httpVersion: nil, headerFields: nil)
+        mockApiManager = MockApiManager(false, withMockData: "{\"fruit\":[{\"type\":\"apple\", \"price\":149, \"weight\":120}]}", mockResposne: mockResposne!)
+        
+        let vc = FruitsListViewController()
+        let vm = FruitsViewModel.init(apiModule: apiModule, apiManager: mockApiManager!)
+        vc.viewModelProtocol = vm
+        vc.viewModelProtocol!.getFruitList()
+        
+        var anyCancelable = Set<AnyCancellable>()
+        vc.viewModelProtocol!.errorPub
+            .receive(on: DispatchQueue.main)
+            .sink {(error) in
+                expect.fulfill()
+                XCTAssertNotNil(error)
+                XCTAssertEqual(error?.localizedDescription, NetworkError.responseError.localizedDescription)
+            }
+            .store(in: &anyCancelable)
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+        
+    
 }
