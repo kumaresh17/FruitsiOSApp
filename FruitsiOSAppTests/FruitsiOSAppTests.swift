@@ -211,6 +211,26 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
 
     }
     
+    // MARK: - Unit test case for Live ApiManager from Interactor, baseline can be set for any performance regression
+    
+   func test_Live_ApiManagerFromApiInteractor() {
+       
+       let expect = expectation(description: "API response completion")
+      
+       let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+     
+       apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: mockApiManager!)
+       apiInteractor?.getFruitDataResponse(completion: { result, error in
+           expect.fulfill()
+           XCTAssertNotNil(result)
+           XCTAssertNil(error)
+           XCTAssertGreaterThan(result!.count, 0)
+       })
+
+       waitForExpectations(timeout: 40, handler: nil)
+       
+    }
+    
 
     func testExample() throws {
         // This is an example of a functional test case.
