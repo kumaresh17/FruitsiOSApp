@@ -213,13 +213,13 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
     
     // MARK: - Unit test case for Live ApiManager from Interactor, baseline can be set for any performance regression
     
-   func test_Live_ApiManagerFromApiInteractor() {
+   func test_Live_success_ApiManagerFromApiInteractor() {
        
        let expect = expectation(description: "API response completion")
       
        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
      
-       apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: mockApiManager!)
+       apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
        apiInteractor?.getFruitDataResponse(completion: { result, error in
            expect.fulfill()
            XCTAssertNotNil(result)
@@ -230,6 +230,24 @@ class FruitsiOSAppTests: XCTestCase,PayLoadFormat {
        waitForExpectations(timeout: 40, handler: nil)
        
     }
+    
+    func test_Live_failure_ApiManagerFromApiInteractor() {
+        
+        let expect = expectation(description: "API response completion")
+       
+        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: nil)
+      
+        apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
+        apiInteractor?.getFruitDataResponse(completion: { result, error in
+            expect.fulfill()
+            XCTAssertNil(result)
+            XCTAssertNotNil(error)
+            
+        })
+
+        waitForExpectations(timeout: 40, handler: nil)
+        
+     }
     
 
     func testExample() throws {
