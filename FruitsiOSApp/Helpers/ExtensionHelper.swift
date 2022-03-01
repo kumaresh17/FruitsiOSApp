@@ -24,7 +24,7 @@ extension FloatingPoint where Self: CVarArg {
 /// Date extension to check for invalid data
 extension Data {
     func isInValid() -> Bool {
-        return self.count > 200 ? false : true
+        return self.count > 40 ? false : true
     }
 }
 

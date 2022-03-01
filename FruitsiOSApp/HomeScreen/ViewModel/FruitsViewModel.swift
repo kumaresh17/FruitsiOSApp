@@ -15,7 +15,7 @@ protocol FruitsViewModelProtocol {
     var errorPub: Published<Error?>.Publisher { get  }
     func getFruitList() -> Void
     func mapToViewModelProtocol(fruitsData:[FruitInfo]?) -> [FruitResponseProtocol]?
-    var fruitInfo:[FruitInfo]? { get set }
+   
 }
 
 class FruitsViewModel:FruitsViewModelProtocol {
