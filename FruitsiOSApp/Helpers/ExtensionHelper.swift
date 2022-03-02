@@ -59,7 +59,7 @@ extension Date {
     static var startApiDate: Date?
     static var startAppDate: Date?
 
-    static func appStarted () -> Void {
+    static func appViewStarted () -> Void {
         startAppDate = Self()
     }
     

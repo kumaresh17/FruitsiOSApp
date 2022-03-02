@@ -13,8 +13,6 @@ protocol FruitsViewModelProtocol {
     var dataForViewPub: Published<[FruitResponseProtocol]?>.Publisher { get  }
     var errorPub: Published<Error?>.Publisher { get  }
     func getFruitList() -> Void
-    func mapToViewModelProtocol(fruitsData:[FruitInfo]) -> [FruitResponseProtocol]?
-    func sendUsagesStatsFruitsList(withEventType eventType:FruitsEventType?, andDataDescription dateDescription:String?) -> Void
 }
 
 class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
@@ -26,8 +24,8 @@ class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
     var errorPub: Published<Error?>.Publisher {$error}
     
     var fruitInfo:[FruitInfo]?
-    var apiManagerProtocol:APIManagerProtocol?
-    var payloadDataProtocol:FruitsHTTPPayloadProtocol?
+    private var apiManagerProtocol:APIManagerProtocol?
+    private  var payloadDataProtocol:FruitsHTTPPayloadProtocol?
     
     /** Dependency injection with payloadData and Api manager so that we can perform unit test with Mock stub data **/
     init(apiModule:FruitsAPIModuleProtocol,apiManager:APIManagerProtocol) {
@@ -41,6 +39,7 @@ class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
     }
 
     func getFruitList() -> Void {
+        
         self.apiManagerProtocol?.getFruitsInfo(payload:self.payloadDataProtocol) { [weak self] result in
             switch result {
             case .success(let data):
@@ -53,9 +52,6 @@ class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
         }
     }
 
-    func sendUsagesStatsFruitsList(withEventType eventType:FruitsEventType?, andDataDescription dateDescription:String?) -> Void {
-        
-    }
     /**
      Mapping  FruitInfo array of Concret Object to FruitResponseProtocol
      Avoid using concrete Codable objects directly, instead used a FruitResponseProtocol

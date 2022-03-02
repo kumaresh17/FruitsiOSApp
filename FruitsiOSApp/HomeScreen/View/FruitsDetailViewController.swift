@@ -10,16 +10,19 @@ import UIKit
 class FruitsDetailViewController: UIViewController {
 
     var fruitModelProtocol: FruitResponseProtocol?
+    var usageStatsViewModel:UsageStatsViewModelProtocol?
     var fruitsDetailDataFormatter :FruitsDetailDataFormatter?
     
-    @IBOutlet weak var fruitNameLabel: UILabel?
-    @IBOutlet weak var priceLabel: UILabel?
-    @IBOutlet weak var weightLabel: UILabel?
+    /// UiLabels are forced unwrap since it is property of Storyboard Interface Builder and it is always expected to have an instance value.
+    @IBOutlet weak var fruitNameLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
     
-    var fruit:String?
-    var price:String?
-    var weight:String?
+    private var fruit:String?
+    private var price:String?
+    private var weight:String?
     
+    /// injecting data formator -validator object so that unit test can be performed
     init (validation:FruitsDetailDataFormatter) {
         self.fruitsDetailDataFormatter = validation
         super.init(nibName: nil, bundle: nil)
@@ -33,15 +36,17 @@ class FruitsDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         validateAndShowFruitDetails()
+        /// send usages data for load time from tapping on the cell from list view controller till it show the details screen.
+        self.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_display, error:nil)
     }
     
-    func validateAndShowFruitDetails() -> Void {
+   private func validateAndShowFruitDetails() -> Void {
         do {
             fruit = try fruitsDetailDataFormatter?.getFruitname(fruitModelProtocol)
             fruitNameLabel?.text = fruit
         } catch {
             fruitNameLabel?.text = error.localizedDescription
-           // presenter?.sendUsagesStatesFruitsList(eventName: FruitsEventType.event_error, dataDescription: error.localizedDescription)
+            self.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_error, error:error)
         }
         
         do {
@@ -49,7 +54,7 @@ class FruitsDetailViewController: UIViewController {
             priceLabel?.text = price
         }  catch {
             priceLabel?.text = error.localizedDescription
-            //presenter?.sendUsagesStatesFruitsList(eventName: FruitsEventType.event_error, dataDescription: error.localizedDescription)
+            self.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_error, error:error)
         }
         
         do {
@@ -57,7 +62,7 @@ class FruitsDetailViewController: UIViewController {
             weightLabel?.text = weight
         }  catch {
             weightLabel?.text = error.localizedDescription
-           // presenter?.sendUsagesStatesFruitsList(eventName: FruitsEventType.event_error, dataDescription: error.localizedDescription)
+            self.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_error, error:error)
         }
     }
 

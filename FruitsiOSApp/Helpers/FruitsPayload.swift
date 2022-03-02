@@ -60,15 +60,15 @@ struct FruitsHTTPPayload: FruitsHTTPPayloadProtocol {
 
 
 enum FruitsEventType: String {
-    case event_Load = "load"
-    case event_Display = "display"
+    case event_load = "load"
+    case event_display = "display"
     case event_error = "error"
     case event_FruitsList =  "FruitsList"
     
     func getType() -> String {
         switch self{
-        case .event_Load: return FruitsEventType.event_Load.rawValue
-        case .event_Display: return FruitsEventType.event_Display.rawValue
+        case .event_load: return FruitsEventType.event_load.rawValue
+        case .event_display: return FruitsEventType.event_display.rawValue
         case .event_error: return FruitsEventType.event_error.rawValue
         case .event_FruitsList: return FruitsEventType.event_FruitsList.rawValue
         }
