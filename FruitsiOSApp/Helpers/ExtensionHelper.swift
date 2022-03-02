@@ -28,7 +28,7 @@ extension Data {
     }
 }
 
-/// Date extension to check for invalid data
+/// Date extension to check for eempty data
 extension Data {
     func isEmptyData() -> Bool {
         return self.count == 0 ? true : false

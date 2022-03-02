@@ -7,6 +7,9 @@
 
 import UIKit
 
+// MARK: - UIAlert view controller
+
+
 protocol AlertDelegate: AnyObject {
     func alert(buttonClickedIndex:Int, buttonTitle: String, tag: Int)
 }

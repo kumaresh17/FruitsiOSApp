@@ -16,7 +16,7 @@ enum ReachabilityStatus {
 }
 
 protocol APIServiceProtocol : AnyObject {
-    var urlSession: URLSessionProtocol {get}
+    var urlSession: URLSessionProtocol { get }
 }
 
 ///  API manager class to handle the API calls

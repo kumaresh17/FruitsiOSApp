@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Payload data formation for request URL
+
 protocol PayLoadFormat {
 
     func formatGetPayload(module: FruitsAPIModuleProtocol) -> FruitsHTTPPayloadProtocol?

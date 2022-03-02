@@ -14,13 +14,13 @@ class FruitsListViewController: UIViewController {
     /// UITableview is forced unwrap since it is property of Storyboard Interface Builder and it is always expected to have an instance value.
     @IBOutlet weak var tableView: UITableView!
     
-     var viewModelProtocol:FruitsViewModelProtocol?
-     private  var usageStatsViewModel:UsageStatsViewModelProtocol?
-     var fruitsModelProtocol: [FruitResponseProtocol]?
+    var viewModelProtocol:FruitsViewModelProtocol?
+    private  var usageStatsViewModel:UsageStatsViewModelProtocol?
+    var fruitsModelProtocol: [FruitResponseProtocol]?
     
     /// To store the publisher streams, if we don't store,  publish streams will be cancelled immediately and we will not be able to get the sink the stream data from the publisher stream.
-    var anyCancelable = Set<AnyCancellable>()
-
+    private var anyCancelable = Set<AnyCancellable>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 44.0
@@ -29,7 +29,7 @@ class FruitsListViewController: UIViewController {
         requestFruitListFromFruitsViewModel()
     }
     
-  private func requestFruitListFromFruitsViewModel () {
+    private func requestFruitListFromFruitsViewModel () {
         ActivityIndicator.showActivityIndicator(view: self.view)
         viewModelProtocol = FruitsViewModel()
         bindingOfViewWithFruitsViewModel()
@@ -37,9 +37,9 @@ class FruitsListViewController: UIViewController {
         Date.currentDate()
         viewModelProtocol?.getFruitList()
     }
-
+    
     /// Binding of View with ViewModel here Combine is used
-  private func bindingOfViewWithFruitsViewModel() {
+    private func bindingOfViewWithFruitsViewModel() {
         viewModelProtocol?.dataForViewPub
             .receive(on: DispatchQueue.main)
             .sink {[weak self] (dataView) in
@@ -65,6 +65,7 @@ class FruitsListViewController: UIViewController {
             .store(in: &anyCancelable)
     }
     
+    /// Since it is a simple navigation to detail screen so using segue instead of router or coordinator design pattern
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let cell = sender as? FruitTableViewCell else { return }
         guard let index = tableView.indexPath(for: cell)?.row else { return }
@@ -73,6 +74,6 @@ class FruitsListViewController: UIViewController {
         Date.appViewStarted()
         detailView.fruitModelProtocol = dataValue[index]
     }
-
+    
 }
 

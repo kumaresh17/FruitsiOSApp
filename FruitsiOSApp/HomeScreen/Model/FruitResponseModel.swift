@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Fruit model raw data
+
 struct FruitResponseModel: Codable {
     var fruits: [FruitInfo]?
     
@@ -27,7 +29,7 @@ struct FruitInfo: Codable {
     }
 }
 
-protocol FruitResponseProtocol {
+protocol FruitResponseProtocol:Any {
     var type: String? {get set}
     var price: Int {get set}
     var weight: Int {get set}

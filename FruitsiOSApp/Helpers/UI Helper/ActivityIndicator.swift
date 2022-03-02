@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 /**
  Activity indicator helper
  */

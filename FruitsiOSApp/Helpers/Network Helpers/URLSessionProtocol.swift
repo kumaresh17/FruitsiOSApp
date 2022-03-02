@@ -9,9 +9,10 @@ import Foundation
 
 typealias DataTaskResult = (Data?, URLResponse?, Error?) -> Void
 
-protocol URLSessionProtocol :AnyObject {
+protocol URLSessionProtocol {
     func dataTask(with url: URL, completionHandler: @escaping DataTaskResult) -> URLSessionDataTask
     func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTask
 }
 
 extension URLSession: URLSessionProtocol { }
+

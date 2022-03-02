@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 
+// MARK: - Fruit home viewmodel
+
 protocol FruitsViewModelProtocol {
     
     var dataForViewPub: Published<[FruitResponseProtocol]?>.Publisher { get  }
@@ -15,7 +17,7 @@ protocol FruitsViewModelProtocol {
     func getFruitList() -> Void
 }
 
-class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
+final class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
     
     /** Combine Publisher for which we have binded with FruitListViewController **/
     @Published var dataForView:[FruitResponseProtocol]?

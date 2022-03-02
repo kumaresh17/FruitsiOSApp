@@ -8,7 +8,7 @@
 import Foundation
 
 /**
-  - Self defined Network errors
+  - Self defined Network Resquest and response states
  */
 
 enum NetworkRequestResponseState: Error {

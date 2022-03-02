@@ -35,59 +35,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
     
     // MARK: - APIManager, view model Unit testcases with Mock data
     
-    func test_mock_apimanager_success_fruit_data_response() {
-        
-        apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType: FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
-        
-        let payload = formatGetPayload(module: apiModule!)
-        
-        mockApiManager?.getFruitsInfo(payload: payload!, completion: { resultData in
-            switch resultData {
-            case .success(let data):
-                XCTAssertNotNil(data)
-                let fruitsCount:Int = data.fruits!.count
-                XCTAssertEqual(fruitsCount , 9)
-                let result =  data.fruits
-                XCTAssertEqual( result![0].type, "apple")
-                XCTAssertEqual( result![0].price, 149)
-                XCTAssertEqual( result![0].weight, 120)
-                
-                XCTAssertEqual( result![1].type, "banana")
-                XCTAssertEqual( result![1].price, 129)
-                XCTAssertEqual( result![1].weight, 80)
-                
-                XCTAssertEqual( result![2].type, "blueberry")
-                XCTAssertEqual( result![2].price, 19)
-                XCTAssertEqual( result![2].weight, 18)
-                
-                XCTAssertEqual( result![3].type, "orange")
-                XCTAssertEqual( result![3].price, 199)
-                XCTAssertEqual( result![3].weight, 150)
-                
-                XCTAssertEqual( result![4].type, "pear")
-                XCTAssertEqual( result![4].price, 99)
-                XCTAssertEqual( result![4].weight, 100)
-                
-                XCTAssertEqual( result![5].type, "strawberry")
-                XCTAssertEqual( result![5].price, 99)
-                XCTAssertEqual( result![5].weight, 20)
-                
-                XCTAssertEqual( result![6].type, "kumquat")
-                XCTAssertEqual( result![6].price, 49)
-                XCTAssertEqual( result![6].weight, 80)
-                
-                XCTAssertEqual( result![7].type, "pitaya")
-                XCTAssertEqual( result![7].price, 599)
-                XCTAssertEqual( result![7].weight, 100)
-                
-                XCTAssertEqual( result![8].type, "kiwi")
-                XCTAssertEqual( result![8].price, 89)
-                XCTAssertEqual( result![8].weight, 200)
-            case .failure(let error):
-                XCTAssertNil(error)
-            }
-        })
-    }
+   
     
     func test_mock_apimanager_failure_statuscode_400_fruit_data_response() {
         
@@ -148,6 +96,60 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
             case .failure(let error):
                 XCTAssertNotNil(error)
                 XCTAssertEqual(error.localizedDescription, NetworkRequestResponseState.inValidData.localizedDescription)
+            }
+        })
+    }
+    
+    func test_mock_apimanager_success_fruit_data_response() {
+        
+        apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType: FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+        
+        let payload = formatGetPayload(module: apiModule!)
+        
+        mockApiManager?.getFruitsInfo(payload: payload!, completion: { resultData in
+            switch resultData {
+            case .success(let data):
+                XCTAssertNotNil(data)
+                let fruitsCount:Int = data.fruits!.count
+                XCTAssertEqual(fruitsCount , 9)
+                let result =  data.fruits
+                XCTAssertEqual( result![0].type, "apple")
+                XCTAssertEqual( result![0].price, 149)
+                XCTAssertEqual( result![0].weight, 120)
+                
+                XCTAssertEqual( result![1].type, "banana")
+                XCTAssertEqual( result![1].price, 129)
+                XCTAssertEqual( result![1].weight, 80)
+                
+                XCTAssertEqual( result![2].type, "blueberry")
+                XCTAssertEqual( result![2].price, 19)
+                XCTAssertEqual( result![2].weight, 18)
+                
+                XCTAssertEqual( result![3].type, "orange")
+                XCTAssertEqual( result![3].price, 199)
+                XCTAssertEqual( result![3].weight, 150)
+                
+                XCTAssertEqual( result![4].type, "pear")
+                XCTAssertEqual( result![4].price, 99)
+                XCTAssertEqual( result![4].weight, 100)
+                
+                XCTAssertEqual( result![5].type, "strawberry")
+                XCTAssertEqual( result![5].price, 99)
+                XCTAssertEqual( result![5].weight, 20)
+                
+                XCTAssertEqual( result![6].type, "kumquat")
+                XCTAssertEqual( result![6].price, 49)
+                XCTAssertEqual( result![6].weight, 80)
+                
+                XCTAssertEqual( result![7].type, "pitaya")
+                XCTAssertEqual( result![7].price, 599)
+                XCTAssertEqual( result![7].weight, 100)
+                
+                XCTAssertEqual( result![8].type, "kiwi")
+                XCTAssertEqual( result![8].price, 89)
+                XCTAssertEqual( result![8].weight, 200)
+            case .failure(let error):
+                XCTAssertNil(error)
             }
         })
     }

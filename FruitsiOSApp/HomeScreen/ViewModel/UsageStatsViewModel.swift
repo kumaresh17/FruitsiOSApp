@@ -7,11 +7,13 @@
 
 import Foundation
 
-protocol UsageStatsViewModelProtocol {
+// MARK: - Usage stats viewmodel
+
+protocol UsageStatsViewModelProtocol:AnyObject {
     func sendUsageState(withEventType eventType: FruitsEventType, error:Error?)
 }
 
-class UsageStatsViewModel:UsageStatsViewModelProtocol,PayLoadFormat {
+final class UsageStatsViewModel:UsageStatsViewModelProtocol,PayLoadFormat {
     
     private var apiManagerProtocol:APIManagerProtocol?
     private var payloadDataProtocol:FruitsHTTPPayloadProtocol?
