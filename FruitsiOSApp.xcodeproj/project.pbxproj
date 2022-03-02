@@ -33,6 +33,7 @@
 		4070161327CB988D0044AB8F /* FruitsPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070161227CB988D0044AB8F /* FruitsPayload.swift */; };
 		4070161527CB9B4B0044AB8F /* FruitsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070161427CB9B4B0044AB8F /* FruitsDetailViewController.swift */; };
 		4070161727CB9B980044AB8F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070161627CB9B980044AB8F /* NetworkError.swift */; };
+		4078FD9A27CF060300BE80B1 /* UsageStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4078FD9927CF060300BE80B1 /* UsageStatsViewModel.swift */; };
 		40AFCA2D27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AFCA2C27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		4070161227CB988D0044AB8F /* FruitsPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsPayload.swift; sourceTree = "<group>"; };
 		4070161427CB9B4B0044AB8F /* FruitsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsDetailViewController.swift; sourceTree = "<group>"; };
 		4070161627CB9B980044AB8F /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4078FD9927CF060300BE80B1 /* UsageStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageStatsViewModel.swift; sourceTree = "<group>"; };
 		40AFCA2C27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsDetailDataFormatterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				4070160627CB907C0044AB8F /* FruitsViewModel.swift */,
+				4078FD9927CF060300BE80B1 /* UsageStatsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				407015D127CB88A60044AB8F /* AppDelegate.swift in Sources */,
 				40186BC127CC1ECB00215EFC /* FruitsDetailDataFormatter.swift in Sources */,
 				4070161327CB988D0044AB8F /* FruitsPayload.swift in Sources */,
+				4078FD9A27CF060300BE80B1 /* UsageStatsViewModel.swift in Sources */,
 				4070160F27CB94560044AB8F /* URLSessionProtocol.swift in Sources */,
 				40186BBF27CC166F00215EFC /* AlertViewController.swift in Sources */,
 				4070160927CB90A30044AB8F /* FruitResponseModel.swift in Sources */,

@@ -7,6 +7,10 @@
 
 import Foundation
 
+/**
+  - Self defined Network errors
+ */
+
 enum NetworkError: Error {
     case invalidURL
     case responseError

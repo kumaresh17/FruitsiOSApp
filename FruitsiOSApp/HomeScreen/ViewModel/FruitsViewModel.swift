@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 import Combine
 
 protocol FruitsViewModelProtocol {
@@ -55,9 +54,7 @@ class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
     }
 
     func sendUsagesStatsFruitsList(withEventType eventType:FruitsEventType?, andDataDescription dateDescription:String?) -> Void {
-         //apiInteractor.sendUsageStats(withEventType eventType, andDataDescription dateDescription) { statusCode, error in
-            
-        //}
+        
     }
     /**
      Mapping  FruitInfo array of Concret Object to FruitResponseProtocol
