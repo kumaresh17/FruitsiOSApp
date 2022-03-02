@@ -28,6 +28,13 @@ extension Data {
     }
 }
 
+/// Date extension to check for invalid data
+extension Data {
+    func isEmptyData() -> Bool {
+        return self.count == 0 ? true : false
+    }
+}
+
 /// A Helper to remove view from the superview
 extension UIView {
     func remove() {

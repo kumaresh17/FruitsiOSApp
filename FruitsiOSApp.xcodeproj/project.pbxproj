@@ -15,6 +15,7 @@
 		40186BC327CC21E400215EFC /* MockApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BC227CC21E400215EFC /* MockApiManager.swift */; };
 		40186BC527CC503500215EFC /* ApiManager+JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BC427CC503500215EFC /* ApiManager+JsonDecoder.swift */; };
 		40186BC727CC509800215EFC /* ApiManager+PrepareRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BC627CC509800215EFC /* ApiManager+PrepareRequest.swift */; };
+		4049C80027CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4049C7FF27CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift */; };
 		407015D127CB88A60044AB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015D027CB88A60044AB8F /* AppDelegate.swift */; };
 		407015D327CB88A60044AB8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015D227CB88A60044AB8F /* SceneDelegate.swift */; };
 		407015D527CB88A60044AB8F /* FruitsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015D427CB88A60044AB8F /* FruitsListViewController.swift */; };
@@ -32,7 +33,7 @@
 		4070161127CB947D0044AB8F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070161027CB947D0044AB8F /* NetworkReachabilityManager.swift */; };
 		4070161327CB988D0044AB8F /* FruitsPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070161227CB988D0044AB8F /* FruitsPayload.swift */; };
 		4070161527CB9B4B0044AB8F /* FruitsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070161427CB9B4B0044AB8F /* FruitsDetailViewController.swift */; };
-		4070161727CB9B980044AB8F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070161627CB9B980044AB8F /* NetworkError.swift */; };
+		4070161727CB9B980044AB8F /* NetworkRequestResponseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070161627CB9B980044AB8F /* NetworkRequestResponseState.swift */; };
 		4078FD9A27CF060300BE80B1 /* UsageStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4078FD9927CF060300BE80B1 /* UsageStatsViewModel.swift */; };
 		40AFCA2D27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AFCA2C27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		40186BC227CC21E400215EFC /* MockApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiManager.swift; sourceTree = "<group>"; };
 		40186BC427CC503500215EFC /* ApiManager+JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+JsonDecoder.swift"; sourceTree = "<group>"; };
 		40186BC627CC509800215EFC /* ApiManager+PrepareRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+PrepareRequest.swift"; sourceTree = "<group>"; };
+		4049C7FF27CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager_UsagesStatsViewModelTests.swift; sourceTree = "<group>"; };
 		407015CD27CB88A60044AB8F /* FruitsiOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FruitsiOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407015D027CB88A60044AB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		407015D227CB88A60044AB8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		4070161027CB947D0044AB8F /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		4070161227CB988D0044AB8F /* FruitsPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsPayload.swift; sourceTree = "<group>"; };
 		4070161427CB9B4B0044AB8F /* FruitsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsDetailViewController.swift; sourceTree = "<group>"; };
-		4070161627CB9B980044AB8F /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4070161627CB9B980044AB8F /* NetworkRequestResponseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestResponseState.swift; sourceTree = "<group>"; };
 		4078FD9927CF060300BE80B1 /* UsageStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageStatsViewModel.swift; sourceTree = "<group>"; };
 		40AFCA2C27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsDetailDataFormatterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,6 +166,7 @@
 			children = (
 				40186BC227CC21E400215EFC /* MockApiManager.swift */,
 				407015E727CB88A80044AB8F /* ApiManager_PayloadData_ViewModelTests.swift */,
+				4049C7FF27CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift */,
 				40AFCA2C27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift */,
 			);
 			path = FruitsiOSAppTests;
@@ -234,7 +237,7 @@
 				4070160C27CB94270044AB8F /* APIManager.swift */,
 				40186BC427CC503500215EFC /* ApiManager+JsonDecoder.swift */,
 				40186BC627CC509800215EFC /* ApiManager+PrepareRequest.swift */,
-				4070161627CB9B980044AB8F /* NetworkError.swift */,
+				4070161627CB9B980044AB8F /* NetworkRequestResponseState.swift */,
 				4070161027CB947D0044AB8F /* NetworkReachabilityManager.swift */,
 			);
 			path = "Network Helpers";
@@ -384,7 +387,7 @@
 				40186BBF27CC166F00215EFC /* AlertViewController.swift in Sources */,
 				4070160927CB90A30044AB8F /* FruitResponseModel.swift in Sources */,
 				40186BC527CC503500215EFC /* ApiManager+JsonDecoder.swift in Sources */,
-				4070161727CB9B980044AB8F /* NetworkError.swift in Sources */,
+				4070161727CB9B980044AB8F /* NetworkRequestResponseState.swift in Sources */,
 				40186BBA27CC017D00215EFC /* FruitsListViewControllerDataSource.swift in Sources */,
 				40186BBD27CC159200215EFC /* ActivityIndicator.swift in Sources */,
 				407015D327CB88A60044AB8F /* SceneDelegate.swift in Sources */,
@@ -401,6 +404,7 @@
 				40186BC327CC21E400215EFC /* MockApiManager.swift in Sources */,
 				40AFCA2D27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift in Sources */,
 				407015E827CB88A80044AB8F /* ApiManager_PayloadData_ViewModelTests.swift in Sources */,
+				4049C80027CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

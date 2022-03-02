@@ -24,8 +24,14 @@ class MockApiManager {
         getApiCalled = false
     }
     
+    /// this convinience init is used for mocking for get fruits list Apis
     convenience init() {
         self.init(false, withMockData: "{\"fruit\":[{\"type\":\"apple\", \"price\":149, \"weight\":120},{\"type\":\"banana\", \"price\":129, \"weight\":80},{\"type\":\"blueberry\",\"price\":19, \"weight\":18},{\"type\":\"orange\", \"price\":199, \"weight\":150},{\"type\":\"pear\", \"price\":99, \"weight\":100},{\"type\":\"strawberry\", \"price\":99, \"weight\":20},{\"type\":\"kumquat\",\"price\":49, \"weight\":80},{\"type\":\"pitaya\", \"price\":599, \"weight\":100},{\"type\":\"kiwi\", \"price\":89, \"weight\":200}]}", mockResposne: HTTPURLResponse(url:URL.init(string:  "https://foo.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)!)
+    }
+    
+    /// this convinience init is used for mocking for UsageStats Apis
+    convenience init(withUsageStats:Bool,statusCode:Int){
+        self.init(false, withMockData: "", mockResposne: HTTPURLResponse(url:URL.init(string:  "https://foo.com")!, statusCode: statusCode, httpVersion: nil, headerFields: nil)!)
     }
     
     init(_ shouldReturnError:Bool,withMockData:String,mockResposne:HTTPURLResponse) {
@@ -39,9 +45,8 @@ class MockApiManager {
 extension MockApiManager: APIManagerProtocol {
     
     func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<Int, Error>) -> Void) {
-        
+        self.sendRequest(payLoad:payload,completion:completion)
     }
-    
     
     func getFruitsInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<FruitResponseModel, Error>) -> Void) {
         self.sendRequest(payLoad:payload,completion:completion)
@@ -56,7 +61,7 @@ extension MockApiManager: APIManagerProtocol {
             return
         }
         guard urlRequest != nil else {
-            completion(.failure(NetworkError.invalidRequestHeader))
+            completion(.failure(NetworkRequestResponseState.invalidRequestHeader))
             return
         }
         

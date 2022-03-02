@@ -86,7 +86,7 @@ final class APIManager: APIServiceProtocol {
             return
         }
         guard let urlRequest = urlRequest else {
-            completion(.failure(NetworkError.invalidRequestHeader))
+            completion(.failure(NetworkRequestResponseState.invalidRequestHeader))
             return
         }
         

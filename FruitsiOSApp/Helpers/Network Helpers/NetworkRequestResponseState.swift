@@ -1,5 +1,5 @@
 //
-//  NetworkError.swift
+//  NetworkRequestResponseState.swift
 //  FruitsiOSApp
 //
 //  Created by kumaresh shrivastava on 27/02/2022.
@@ -11,7 +11,7 @@ import Foundation
   - Self defined Network errors
  */
 
-enum NetworkError: Error {
+enum NetworkRequestResponseState: Error {
     case invalidURL
     case responseError
     case noDataFound
@@ -20,9 +20,10 @@ enum NetworkError: Error {
     case invalidRequestHeader
     case invalidRequest
     case invalidPayload
+    case emptyData_SucessResponseCode
 }
 
-extension NetworkError: LocalizedError {
+extension NetworkRequestResponseState: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
@@ -39,6 +40,8 @@ extension NetworkError: LocalizedError {
             return NSLocalizedString("InvalidRequestHeader", comment: "InvalidRequestHeader")
         case .invalidRequest:
             return NSLocalizedString("InvalidRequest", comment: "InvalidRequest")
+        case .emptyData_SucessResponseCode:
+            return NSLocalizedString("EmptyData with valid Success response", comment: "EmptyData")
         case .unknown:
             return NSLocalizedString("Unknown error", comment: "Unknown error")
         }

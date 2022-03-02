@@ -105,7 +105,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
                 XCTAssertNil(data)
             case .failure(let error):
                 XCTAssertNotNil(error)
-                XCTAssertEqual(error.localizedDescription, NetworkError.responseError.localizedDescription)
+                XCTAssertEqual(error.localizedDescription, NetworkRequestResponseState.responseError.localizedDescription)
             }
         })
     }
@@ -147,7 +147,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
                 XCTAssertNil(data)
             case .failure(let error):
                 XCTAssertNotNil(error)
-                XCTAssertEqual(error.localizedDescription, NetworkError.inValidData.localizedDescription)
+                XCTAssertEqual(error.localizedDescription, NetworkRequestResponseState.inValidData.localizedDescription)
             }
         })
     }
@@ -163,7 +163,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
                 XCTAssertNil(data)
             case .failure(let error):
                 XCTAssertNotNil(error)
-                XCTAssertEqual(error.localizedDescription, NetworkError.invalidPayload.localizedDescription)
+                XCTAssertEqual(error.localizedDescription, NetworkRequestResponseState.invalidPayload.localizedDescription)
             }
         })
     }
@@ -179,7 +179,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
                 XCTAssertNil(data)
             case .failure(let error):
                 XCTAssertNotNil(error)
-                XCTAssertEqual(error.localizedDescription, NetworkError.invalidPayload.localizedDescription)
+                XCTAssertEqual(error.localizedDescription, NetworkRequestResponseState.invalidPayload.localizedDescription)
             }
         })
     }
@@ -195,7 +195,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
                 XCTAssertNil(data)
             case .failure(let error):
                 XCTAssertNotNil(error)
-                XCTAssertEqual(error.localizedDescription, NetworkError.invalidPayload.localizedDescription)
+                XCTAssertEqual(error.localizedDescription, NetworkRequestResponseState.invalidPayload.localizedDescription)
             }
         })
     }
@@ -279,7 +279,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
         
         XCTAssertNotNil(fruitsViewModel.error)
         XCTAssertNil(fruitsViewModel.fruitInfo)
-        XCTAssertEqual(fruitsViewModel.error?.localizedDescription, NetworkError.responseError.localizedDescription)
+        XCTAssertEqual(fruitsViewModel.error?.localizedDescription, NetworkRequestResponseState.responseError.localizedDescription)
     }
     
     func test_ViewModel_with_Mock_Api_response_data_invalid_fail() {
@@ -311,7 +311,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
         self.fruitsViewModel?.getFruitList()
         
         XCTAssertNotNil(fruitsViewModel.error)
-        XCTAssertEqual(fruitsViewModel.error?.localizedDescription, NetworkError.inValidData.localizedDescription)
+        XCTAssertEqual(fruitsViewModel.error?.localizedDescription, NetworkRequestResponseState.inValidData.localizedDescription)
     }
     
     func test_mock_api_viewmodel_sink_with_data_response_forview() {
@@ -357,7 +357,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
             .sink { (error) in
                 expect.fulfill()
                 XCTAssertNotNil(error)
-                XCTAssertEqual(error?.localizedDescription, NetworkError.responseError.localizedDescription)
+                XCTAssertEqual(error?.localizedDescription, NetworkRequestResponseState.responseError.localizedDescription)
             }
             .store(in: &anyCancelable)
         
@@ -414,7 +414,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
             .sink {(error) in
                 expect.fulfill()
                 XCTAssertNotNil(error)
-                XCTAssertEqual(error?.localizedDescription, NetworkError.responseError.localizedDescription)
+                XCTAssertEqual(error?.localizedDescription, NetworkRequestResponseState.responseError.localizedDescription)
             }
             .store(in: &anyCancelable)
         
