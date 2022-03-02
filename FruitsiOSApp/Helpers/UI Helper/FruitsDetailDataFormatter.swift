@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FruitsDetailValidator {
+struct FruitsDetailDataFormatter {
     
     func getFruitname(_ response:FruitResponseProtocol?) throws -> String {
 

@@ -61,7 +61,7 @@ final class APIManager: APIServiceProtocol {
         }
         reachabilityManager?.startListening()
     }
-    /*
+    /**
      Show Alert message on no network connection
      */
     private func showErrorForNoNetwork()  {
@@ -76,7 +76,7 @@ final class APIManager: APIServiceProtocol {
     }
     
     /**
-     - Send API Request
+      Send API Request
      **/
     private func sendRequest<T: Codable>(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<T, Error>) -> Void)  {
         
@@ -101,7 +101,7 @@ final class APIManager: APIServiceProtocol {
 /// APIManager Protocol
 protocol APIManagerProtocol : AnyObject {
     func getFruitsInfo(payload: FruitsHTTPPayloadProtocol?,completion: @escaping (Result<FruitResponseModel, Error>) -> Void)
-   // func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol, completion: @escaping (Result<Int, Error>) -> Void)
+    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<Int, Error>) -> Void)
 }
 
 extension APIManager: APIManagerProtocol {
@@ -114,9 +114,9 @@ extension APIManager: APIManagerProtocol {
         sendRequest(payload: payload,completion: completion)
     }
     
-//    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol, completion: @escaping (Result<Int, Error>) -> Void){
-//        sendRequest(payload: payload?,completion: completion)
-//    }
+    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<Int, Error>) -> Void){
+        sendRequest(payload: payload,completion: completion)
+    }
 }
 
 

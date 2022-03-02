@@ -10,7 +10,7 @@ import UIKit
 class FruitsDetailViewController: UIViewController {
 
     var fruitModelProtocol: FruitResponseProtocol?
-    var detailValidator :FruitsDetailValidator?
+    var fruitsDetailDataFormatter :FruitsDetailDataFormatter?
     
     @IBOutlet weak var fruitNameLabel: UILabel?
     @IBOutlet weak var priceLabel: UILabel?
@@ -20,13 +20,13 @@ class FruitsDetailViewController: UIViewController {
     var price:String?
     var weight:String?
     
-    init (validation:FruitsDetailValidator) {
-        self.detailValidator = validation
+    init (validation:FruitsDetailDataFormatter) {
+        self.fruitsDetailDataFormatter = validation
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        self.detailValidator = FruitsDetailValidator()
+        self.fruitsDetailDataFormatter = FruitsDetailDataFormatter()
         super.init(coder: coder)
     }
     
@@ -37,7 +37,7 @@ class FruitsDetailViewController: UIViewController {
     
     func validateAndShowFruitDetails() -> Void {
         do {
-            fruit = try detailValidator?.getFruitname(fruitModelProtocol)
+            fruit = try fruitsDetailDataFormatter?.getFruitname(fruitModelProtocol)
             fruitNameLabel?.text = fruit
         } catch {
             fruitNameLabel?.text = error.localizedDescription
@@ -45,7 +45,7 @@ class FruitsDetailViewController: UIViewController {
         }
         
         do {
-            price = try detailValidator?.getPrice(fruitModelProtocol)
+            price = try fruitsDetailDataFormatter?.getPrice(fruitModelProtocol)
             priceLabel?.text = price
         }  catch {
             priceLabel?.text = error.localizedDescription
@@ -53,7 +53,7 @@ class FruitsDetailViewController: UIViewController {
         }
         
         do {
-            weight = try detailValidator?.getWeightInKg(fruitModelProtocol)
+            weight = try fruitsDetailDataFormatter?.getWeightInKg(fruitModelProtocol)
             weightLabel?.text = weight
         }  catch {
             weightLabel?.text = error.localizedDescription

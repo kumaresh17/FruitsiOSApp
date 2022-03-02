@@ -8,16 +8,16 @@
 import XCTest
 @testable import FruitsiOSApp
 
-class FruitDetailValidatorTests: XCTestCase {
+class FruitsDetailDataFormatterTests: XCTestCase {
     
     
-    var validator: FruitsDetailValidator!
+    var validator: FruitsDetailDataFormatter!
     var fruitTestObj:FruitResponseProtocol?
 
     
     override func setUp() {
         super.setUp()
-        validator = FruitsDetailValidator()
+        validator = FruitsDetailDataFormatter()
     }
     
     override func tearDown() {

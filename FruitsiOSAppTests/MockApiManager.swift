@@ -38,6 +38,11 @@ class MockApiManager {
 
 extension MockApiManager: APIManagerProtocol {
     
+    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<Int, Error>) -> Void) {
+        
+    }
+    
+    
     func getFruitsInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<FruitResponseModel, Error>) -> Void) {
         self.sendRequest(payLoad:payload,completion:completion)
     }
@@ -62,11 +67,6 @@ extension MockApiManager: APIManagerProtocol {
             apiManager.jsonDecoder(data: data, response: mockURLResponse,completion: completion)
         }
     }
-    
-    
-//    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol, completion: @escaping (Result<Int, Error>) -> Void) {
-//
-//    }
-    
+
     
 }

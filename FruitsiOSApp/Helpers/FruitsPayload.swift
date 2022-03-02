@@ -93,6 +93,7 @@ enum FruitsQueryName: String{
 enum FruitsHTTPMimeType: String {
     case applicationJSON = "application/json; charset=utf-8"
 }
+
 enum FruitsHTTPHeaderType: String{
     case contentType    = "Content-Type"
 }

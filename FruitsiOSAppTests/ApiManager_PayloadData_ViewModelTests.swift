@@ -6,7 +6,7 @@
 //
 
 /**
- Unit test cases for Mock APi manager, Api manager  JsonDecoder , Payload data , FruitsAPiInteractor and View Model
+ Unit test cases for Mock APi manager, Api manager  JsonDecoder , Payload data  , View Model and binding between Viewmodel and View
  For all the cases of invalid resposne code, invalid data in resposne, missing parameter in response and as well as success cases.
  */
 
@@ -15,12 +15,10 @@ import Combine
 
 @testable import FruitsiOSApp
 
-class ApiManager_ApiInteractor_ApiPayload_ViewModelTests: XCTestCase,PayLoadFormat {
+class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
     
     var mockApiManager:MockApiManager?
     var apiModule:FruitsAPIModuleProtocol?
-    var apiInteractor:FruitsApiInteractorProtocol?
-    //  var fruitsViewModel: FruitsViewModelProtocol!
     var fruitsViewModel: FruitsViewModel!
     
     override func setUp() {
@@ -168,54 +166,54 @@ class ApiManager_ApiInteractor_ApiPayload_ViewModelTests: XCTestCase,PayLoadForm
     
     // MARK: - Unit test case for FruitsApiInteractor
     
-    func test_ApiInteractor_with_Mock_Api_Resposne() {
-        
-        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
-        
-        apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: mockApiManager!)
-        apiInteractor?.getFruitDataResponse(completion: { result, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(result)
-            
-            XCTAssertEqual( result![0].type, "apple")
-            XCTAssertEqual( result![0].price, 149)
-            XCTAssertEqual( result![0].weight, 120)
-            
-            XCTAssertEqual( result![1].type, "banana")
-            XCTAssertEqual( result![1].price, 129)
-            XCTAssertEqual( result![1].weight, 80)
-            
-            XCTAssertEqual( result![2].type, "blueberry")
-            XCTAssertEqual( result![2].price, 19)
-            XCTAssertEqual( result![2].weight, 18)
-            
-            XCTAssertEqual( result![3].type, "orange")
-            XCTAssertEqual( result![3].price, 199)
-            XCTAssertEqual( result![3].weight, 150)
-            
-            XCTAssertEqual( result![4].type, "pear")
-            XCTAssertEqual( result![4].price, 99)
-            XCTAssertEqual( result![4].weight, 100)
-            
-            XCTAssertEqual( result![5].type, "strawberry")
-            XCTAssertEqual( result![5].price, 99)
-            XCTAssertEqual( result![5].weight, 20)
-            
-            XCTAssertEqual( result![6].type, "kumquat")
-            XCTAssertEqual( result![6].price, 49)
-            XCTAssertEqual( result![6].weight, 80)
-            
-            XCTAssertEqual( result![7].type, "pitaya")
-            XCTAssertEqual( result![7].price, 599)
-            XCTAssertEqual( result![7].weight, 100)
-            
-            XCTAssertEqual( result![8].type, "kiwi")
-            XCTAssertEqual( result![8].price, 89)
-            XCTAssertEqual( result![8].weight, 200)
-            
-        })
-        
-    }
+//    func test_ApiInteractor_with_Mock_Api_Resposne() {
+//
+//        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+//
+//        apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: mockApiManager!)
+//        apiInteractor?.getFruitDataResponse(completion: { result, error in
+//            XCTAssertNil(error)
+//            XCTAssertNotNil(result)
+//
+//            XCTAssertEqual( result![0].type, "apple")
+//            XCTAssertEqual( result![0].price, 149)
+//            XCTAssertEqual( result![0].weight, 120)
+//
+//            XCTAssertEqual( result![1].type, "banana")
+//            XCTAssertEqual( result![1].price, 129)
+//            XCTAssertEqual( result![1].weight, 80)
+//
+//            XCTAssertEqual( result![2].type, "blueberry")
+//            XCTAssertEqual( result![2].price, 19)
+//            XCTAssertEqual( result![2].weight, 18)
+//
+//            XCTAssertEqual( result![3].type, "orange")
+//            XCTAssertEqual( result![3].price, 199)
+//            XCTAssertEqual( result![3].weight, 150)
+//
+//            XCTAssertEqual( result![4].type, "pear")
+//            XCTAssertEqual( result![4].price, 99)
+//            XCTAssertEqual( result![4].weight, 100)
+//
+//            XCTAssertEqual( result![5].type, "strawberry")
+//            XCTAssertEqual( result![5].price, 99)
+//            XCTAssertEqual( result![5].weight, 20)
+//
+//            XCTAssertEqual( result![6].type, "kumquat")
+//            XCTAssertEqual( result![6].price, 49)
+//            XCTAssertEqual( result![6].weight, 80)
+//
+//            XCTAssertEqual( result![7].type, "pitaya")
+//            XCTAssertEqual( result![7].price, 599)
+//            XCTAssertEqual( result![7].weight, 100)
+//
+//            XCTAssertEqual( result![8].type, "kiwi")
+//            XCTAssertEqual( result![8].price, 89)
+//            XCTAssertEqual( result![8].weight, 200)
+//
+//        })
+//
+//    }
     
     // MARK: - Unit test case for Fruits View Model
     
@@ -231,7 +229,6 @@ class ApiManager_ApiInteractor_ApiPayload_ViewModelTests: XCTestCase,PayLoadForm
         fruitsViewModel = FruitsViewModel.init(apiModule: apiModule, apiManager: mockApiManager!)
         fruitsViewModel?.getFruitList()
         
-        XCTAssertNotNil(fruitsViewModel.dataForViewPub)
         XCTAssertNotNil(fruitsViewModel.fruitInfo)
         XCTAssertNil(fruitsViewModel.error)
         
@@ -349,7 +346,7 @@ class ApiManager_ApiInteractor_ApiPayload_ViewModelTests: XCTestCase,PayLoadForm
         XCTAssertEqual(fruitsViewModel.error?.localizedDescription, NetworkError.inValidData.localizedDescription)
     }
     
-    func test_ViewModel_Sink_WithData_ForView() {
+    func test_mock_api_viewmodel_sink_with_data_response_forview() {
         
         let expect = expectation(description: "API response completion")
         let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
@@ -375,7 +372,7 @@ class ApiManager_ApiInteractor_ApiPayload_ViewModelTests: XCTestCase,PayLoadForm
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    func test_ViewModel_Sink_WithError_ForView() {
+    func test_mock_api_viewmodel_sink_with_error_forview() {
         
         let expect = expectation(description: "API response completion")
         let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
@@ -401,42 +398,42 @@ class ApiManager_ApiInteractor_ApiPayload_ViewModelTests: XCTestCase,PayLoadForm
     
     // MARK: - Unit test case for Live ApiManager from Interactor
     
-    func test_Live_success_ApiManagerFromApiInteractor() {
-        
-        let expect = expectation(description: "API response completion")
-        
-        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
-        
-        apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
-        apiInteractor?.getFruitDataResponse(completion: { result, error in
-            expect.fulfill()
-            XCTAssertNotNil(result)
-            XCTAssertNil(error)
-            XCTAssertGreaterThan(result!.count, 0)
-        })
-        
-        waitForExpectations(timeout: 40, handler: nil)
-        
-    }
-    
-    func test_Live_failure_ApiManagerFromApiInteractor() {
-        
-        let expect = expectation(description: "API response completion")
-        
-        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: nil)
-        
-        apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
-        apiInteractor?.getFruitDataResponse(completion: { result, error in
-            expect.fulfill()
-            XCTAssertNil(result)
-            XCTAssertNotNil(error)
-        })
-        waitForExpectations(timeout: 40, handler: nil)
-    }
+//    func test_Live_success_ApiManagerFromApiInteractor() {
+//
+//        let expect = expectation(description: "API response completion")
+//
+//        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
+//
+//        apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
+//        apiInteractor?.getFruitDataResponse(completion: { result, error in
+//            expect.fulfill()
+//            XCTAssertNotNil(result)
+//            XCTAssertNil(error)
+//            XCTAssertGreaterThan(result!.count, 0)
+//        })
+//
+//        waitForExpectations(timeout: 40, handler: nil)
+//
+//    }
+//
+//    func test_Live_failure_ApiManagerFromApiInteractor() {
+//
+//        let expect = expectation(description: "API response completion")
+//
+//        let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: nil)
+//
+//        apiInteractor = FruitsApiInteractor.init(apiModule: apiModule, apiManager: APIManager())
+//        apiInteractor?.getFruitDataResponse(completion: { result, error in
+//            expect.fulfill()
+//            XCTAssertNil(result)
+//            XCTAssertNotNil(error)
+//        })
+//        waitForExpectations(timeout: 40, handler: nil)
+//    }
     
     // MARK: - Unit test case for Mock ApiManager from FruitsListViewController end to end
     
-    func test_using_mock_api_ViewModel_Binding_with_FruitListViewController_with_data_Sucess() {
+    func test_using_mock_api_viewmodel_binding_with_fruitListViewController_with_data_success() {
         
         let expect = expectation(description: "API response completion")
         let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)
@@ -465,7 +462,7 @@ class ApiManager_ApiInteractor_ApiPayload_ViewModelTests: XCTestCase,PayLoadForm
     }
     
     
-    func test_using_mock_api_ViewModel_Binding_with_FruitListViewController_with_Error() {
+    func test_using_mock_api_viewmodel_binding_with_fruitListViewController_with_error() {
         
         let expect = expectation(description: "API response completion")
         let apiModule = FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl)

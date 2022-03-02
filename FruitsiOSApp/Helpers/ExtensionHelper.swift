@@ -46,3 +46,35 @@ extension UIApplication {
             .first(where: \.isKeyWindow)
     }
 }
+
+extension UITableView {
+    func reloadData(completion:@escaping ()->()) {
+        UIView.animate(withDuration: 0, animations: reloadData)
+            { _ in completion() }
+    }
+}
+
+extension Date {
+    
+    static var startApiDate: Date?
+    static var startAppDate: Date?
+
+    static func appStarted () -> Void {
+        startAppDate = Self()
+    }
+    
+    static func currentDate() -> Void {
+        startApiDate = Self()
+    }
+
+    static func timelapsedSinceApiHit() -> Double {
+        guard let starDateMS = startApiDate else {return 0.0}
+        return fabs( starDateMS.timeIntervalSinceNow) * 1000
+    }
+    
+    static func appViewLoadedComplete() -> Double {
+        guard let starDateMS = startAppDate else {return 0.0}
+        return fabs( starDateMS.timeIntervalSinceNow) * 1000
+    }
+    
+}

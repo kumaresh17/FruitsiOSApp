@@ -15,44 +15,51 @@ protocol FruitsViewModelProtocol {
     var errorPub: Published<Error?>.Publisher { get  }
     func getFruitList() -> Void
     func mapToViewModelProtocol(fruitsData:[FruitInfo]?) -> [FruitResponseProtocol]?
-   
+    func sendUsagesStatsFruitsList(withEventType eventType:FruitsEventType?, andDataDescription dateDescription:String?) -> Void
 }
 
-class FruitsViewModel:FruitsViewModelProtocol {
-   
-    /**
-     Combine Publisher for which we have binded with View
-     */
+class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
+    
+    /** Combine Publisher for which we have binded with FruitListViewController*/
     @Published var dataForView:[FruitResponseProtocol]?
     @Published var error:Error?
     var dataForViewPub: Published<[FruitResponseProtocol]?>.Publisher {$dataForView}
     var errorPub: Published<Error?>.Publisher {$error}
     
-    var apiModuleProtocol: FruitsAPIModuleProtocol
-    var apiInteractor:FruitsApiInteractorProtocol
     var fruitInfo:[FruitInfo]?
+    var apiManagerProtocol:APIManagerProtocol?
+    var payloadDataProtocol:FruitsHTTPPayloadProtocol?
     
-    
-    /**Dependency injection with ApiModule and Api manager**/
+    /**Dependency injection with payloadData and Api manager so that we can perform unit test with Mock stub data**/
     init(apiModule:FruitsAPIModuleProtocol,apiManager:APIManagerProtocol) {
-        self.apiModuleProtocol = apiModule
-        self.apiInteractor = FruitsApiInteractor.init(apiModule: self.apiModuleProtocol, apiManager: apiManager)
+        self.payloadDataProtocol = formatGetPayload(module:apiModule)
+        self.apiManagerProtocol = apiManager
     }
     
-    /// This convenince int wil be called from the view 
+    /// This convenince int will be called from the view with default parameters set for desiginated initializer
     convenience init () {
         self.init(apiModule: FruitsAPIModule(payloadType: FruitsHTTPPayloadType.requestMethodGET, apiParameterEventType:  FruitsEventType.event_FruitsList, apiParameterEventData: nil, fruitsUrl: FruitsHTTPSUrl.fruitsHTTPSUrl), apiManager:APIManager())
     }
-    
+
     func getFruitList() -> Void {
-        apiInteractor.getFruitDataResponse {[weak self] resultData, error in
-            self?.fruitInfo = resultData
-            self?.error = error
-            self?.dataForView =  self?.mapToViewModelProtocol(fruitsData: resultData)
+        self.apiManagerProtocol?.getFruitsInfo(payload:self.payloadDataProtocol) {[weak self] result in
+            switch result {
+            case .success(let data):
+                self?.fruitInfo = data.fruits
+                self?.dataForView = self?.mapToViewModelProtocol(fruitsData: self?.fruitInfo)
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
+
+    func sendUsagesStatsFruitsList(withEventType eventType:FruitsEventType?, andDataDescription dateDescription:String?) -> Void {
+         //apiInteractor.sendUsageStats(withEventType eventType, andDataDescription dateDescription) { statusCode, error in
+            
+        //}
+    }
     /**
-     Mapping  FruitInfo array of Object to FruitResponseProtocol
+     Mapping  FruitInfo array of Concret Object to FruitResponseProtocol
      Avoid using concrete Codable objects directly, instead used a FruitResponseProtocol
      Prepare Data which is required to display on the View
      */
