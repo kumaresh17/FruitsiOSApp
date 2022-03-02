@@ -14,13 +14,13 @@ protocol FruitsViewModelProtocol {
     var dataForViewPub: Published<[FruitResponseProtocol]?>.Publisher { get  }
     var errorPub: Published<Error?>.Publisher { get  }
     func getFruitList() -> Void
-    func mapToViewModelProtocol(fruitsData:[FruitInfo]?) -> [FruitResponseProtocol]?
+    func mapToViewModelProtocol(fruitsData:[FruitInfo]) -> [FruitResponseProtocol]?
     func sendUsagesStatsFruitsList(withEventType eventType:FruitsEventType?, andDataDescription dateDescription:String?) -> Void
 }
 
 class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
     
-    /** Combine Publisher for which we have binded with FruitListViewController*/
+    /** Combine Publisher for which we have binded with FruitListViewController **/
     @Published var dataForView:[FruitResponseProtocol]?
     @Published var error:Error?
     var dataForViewPub: Published<[FruitResponseProtocol]?>.Publisher {$dataForView}
@@ -30,7 +30,7 @@ class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
     var apiManagerProtocol:APIManagerProtocol?
     var payloadDataProtocol:FruitsHTTPPayloadProtocol?
     
-    /**Dependency injection with payloadData and Api manager so that we can perform unit test with Mock stub data**/
+    /** Dependency injection with payloadData and Api manager so that we can perform unit test with Mock stub data **/
     init(apiModule:FruitsAPIModuleProtocol,apiManager:APIManagerProtocol) {
         self.payloadDataProtocol = formatGetPayload(module:apiModule)
         self.apiManagerProtocol = apiManager
@@ -42,11 +42,12 @@ class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
     }
 
     func getFruitList() -> Void {
-        self.apiManagerProtocol?.getFruitsInfo(payload:self.payloadDataProtocol) {[weak self] result in
+        self.apiManagerProtocol?.getFruitsInfo(payload:self.payloadDataProtocol) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.fruitInfo = data.fruits
-                self?.dataForView = self?.mapToViewModelProtocol(fruitsData: self?.fruitInfo)
+                /// Here self?.fruitInfo is forced unwrap because data failure cases has been handled in ApiManager jsondecoder extension, and verified by unit test with Mock data
+                self?.dataForView = self?.mapToViewModelProtocol(fruitsData: (self?.fruitInfo)!)
             case .failure(let error):
                 self?.error = error
             }
@@ -63,10 +64,8 @@ class FruitsViewModel:FruitsViewModelProtocol,PayLoadFormat {
      Avoid using concrete Codable objects directly, instead used a FruitResponseProtocol
      Prepare Data which is required to display on the View
      */
-    func mapToViewModelProtocol(fruitsData:[FruitInfo]?) -> [FruitResponseProtocol]? {
-        guard let fruitsData = fruitsData else {
-            return nil
-        }
+    func mapToViewModelProtocol(fruitsData:[FruitInfo]) -> [FruitResponseProtocol]? {
+
         var result:[FruitResponseProtocol]? = [FruitResponseProtocol]()
 
         _ = fruitsData.map {
