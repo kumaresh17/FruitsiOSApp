@@ -37,7 +37,7 @@ class FruitsDetailViewController: UIViewController {
         super.viewDidLoad()
         validateAndShowFruitDetails()
         /// send usages data for load time from tapping on the cell from list view controller till it show the details screen.
-        self.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_display, error:nil)
+        self.usageStatsViewModel?.processUsageStats(withEventType: FruitsEventType.event_display, error:nil)
     }
     
    private func validateAndShowFruitDetails() -> Void {
@@ -46,7 +46,7 @@ class FruitsDetailViewController: UIViewController {
             fruitNameLabel?.text = fruit
         } catch {
             fruitNameLabel?.text = error.localizedDescription
-            self.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_error, error:error)
+            self.usageStatsViewModel?.processUsageStats(withEventType: FruitsEventType.event_error, error:error)
         }
         
         do {
@@ -54,7 +54,7 @@ class FruitsDetailViewController: UIViewController {
             priceLabel?.text = price
         }  catch {
             priceLabel?.text = error.localizedDescription
-            self.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_error, error:error)
+            self.usageStatsViewModel?.processUsageStats(withEventType: FruitsEventType.event_error, error:error)
         }
         
         do {
@@ -62,7 +62,7 @@ class FruitsDetailViewController: UIViewController {
             weightLabel?.text = weight
         }  catch {
             weightLabel?.text = error.localizedDescription
-            self.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_error, error:error)
+            self.usageStatsViewModel?.processUsageStats(withEventType: FruitsEventType.event_error, error:error)
         }
     }
 

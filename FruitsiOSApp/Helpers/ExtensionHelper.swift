@@ -63,24 +63,24 @@ extension UITableView {
 
 extension Date {
     
-    static var startApiDate: Date?
-    static var startAppDate: Date?
+    static var apiInitiatedStartTime: Date?
+    static var viewInitiatedStartTime: Date?
 
-    static func appViewStarted () -> Void {
-        startAppDate = Self()
+    static func timeViewLoadStarted () -> Void {
+        viewInitiatedStartTime = Self()
     }
     
-    static func currentDate() -> Void {
-        startApiDate = Self()
+    static func timeApiStarted() -> Void {
+        apiInitiatedStartTime = Self()
     }
 
     static func timelapsedSinceApiHit() -> Double {
-        guard let starDateMS = startApiDate else {return 0.0}
+        guard let starDateMS = apiInitiatedStartTime else {return 0.0}
         return fabs( starDateMS.timeIntervalSinceNow) * 1000
     }
     
     static func appViewLoadedComplete() -> Double {
-        guard let starDateMS = startAppDate else {return 0.0}
+        guard let starDateMS = viewInitiatedStartTime else {return 0.0}
         return fabs( starDateMS.timeIntervalSinceNow) * 1000
     }
     

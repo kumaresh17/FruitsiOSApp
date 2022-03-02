@@ -101,7 +101,7 @@ final class APIManager: APIServiceProtocol {
 /// APIManager Protocol
 protocol APIManagerProtocol : AnyObject {
     func getFruitsInfo(payload: FruitsHTTPPayloadProtocol?,completion: @escaping (Result<FruitResponseModel, Error>) -> Void)
-    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<Int, Error>) -> Void)
+    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<String, Error>) -> Void)
 }
 
 extension APIManager: APIManagerProtocol {
@@ -114,7 +114,7 @@ extension APIManager: APIManagerProtocol {
         sendRequest(payload: payload,completion: completion)
     }
     
-    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<Int, Error>) -> Void){
+    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<String, Error>) -> Void){
         sendRequest(payload: payload,completion: completion)
     }
 }

@@ -9,10 +9,7 @@ import UIKit
 import Combine
 
 
-class FruitsListViewController: UIViewController {
-    
-    /// UITableview is forced unwrap since it is property of Storyboard Interface Builder and it is always expected to have an instance value.
-    @IBOutlet weak var tableView: UITableView!
+class FruitsListTableViewController: UITableViewController {
     
     var viewModelProtocol:FruitsViewModelProtocol?
     private  var usageStatsViewModel:UsageStatsViewModelProtocol?
@@ -23,18 +20,30 @@ class FruitsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 44.0
+        self.tableView.rowHeight = UITableView.automaticDimension
+        setUpHomeScreen()
+    }
+    
+    private func setUpHomeScreen()  {
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        ActivityIndicator.showActivityIndicator(view: self.view)
+        viewModelProtocol = FruitsViewModel()
+        bindingOfViewWithFruitsViewModel()
         usageStatsViewModel = UsageStatsViewModel()
         requestFruitListFromFruitsViewModel()
     }
     
+    @objc private func refresh(sender:AnyObject) {
+        /// Capuring start time for the usage stats to be send when the table reload is completed with response.
+        Date.timeViewLoadStarted()
+        requestFruitListFromFruitsViewModel()
+        self.refreshControl?.endRefreshing()
+    }
+    
     private func requestFruitListFromFruitsViewModel () {
-        ActivityIndicator.showActivityIndicator(view: self.view)
-        viewModelProtocol = FruitsViewModel()
-        bindingOfViewWithFruitsViewModel()
         // This is to pin the time when the api started, to calculate the time taken for the Api to compelete and send usage stats
-        Date.currentDate()
+        Date.timeApiStarted()
         viewModelProtocol?.getFruitList()
     }
     
@@ -44,12 +53,11 @@ class FruitsListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink {[weak self] (dataView) in
                 guard let dataView = dataView else {return}
-                self?.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_load, error: nil)
+                self?.usageStatsViewModel?.processUsageStats(withEventType: FruitsEventType.event_load, error: nil)
                 self?.fruitsModelProtocol = dataView
                 self?.tableView.reloadData {
-                    self?.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_display, error: nil)
+                    self?.usageStatsViewModel?.processUsageStats(withEventType: FruitsEventType.event_display, error: nil)
                 }
-                
                 ActivityIndicator.stopActivityIndicator()
             }
             .store(in: &anyCancelable)
@@ -60,20 +68,12 @@ class FruitsListViewController: UIViewController {
                 guard let error = error else { return }
                 AlertViewController.showAlert(withTitle:"Alert" , message: error.localizedDescription)
                 ActivityIndicator.stopActivityIndicator()
-                self?.usageStatsViewModel?.sendUsageState(withEventType: FruitsEventType.event_error, error: error)
+                self?.usageStatsViewModel?.processUsageStats(withEventType: FruitsEventType.event_error, error: error)
             }
             .store(in: &anyCancelable)
     }
     
-    /// Since it is a simple navigation to detail screen so using segue instead of router or coordinator design pattern
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let cell = sender as? FruitTableViewCell else { return }
-        guard let index = tableView.indexPath(for: cell)?.row else { return }
-        guard let detailView = segue.destination as? FruitsDetailViewController else { return }        
-        guard let dataValue = self.fruitsModelProtocol else { return }
-        Date.appViewStarted()
-        detailView.fruitModelProtocol = dataValue[index]
-    }
+   
     
 }
 

@@ -376,7 +376,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
         let mockResposne =  HTTPURLResponse(url:URL.init(string: "https://foo.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)
         mockApiManager = MockApiManager(false, withMockData: "{\"fruit\":[{\"type\":\"apple\", \"price\":149, \"weight\":120}]}", mockResposne: mockResposne!)
         
-        let vc = FruitsListViewController()
+        let vc = FruitsListTableViewController()
         let vm = FruitsViewModel.init(apiModule: apiModule, apiManager: mockApiManager!)
         vc.viewModelProtocol = vm
         vc.viewModelProtocol!.getFruitList()
@@ -405,7 +405,7 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
         let mockResposne =  HTTPURLResponse(url:URL.init(string: "https://foo.com")!, statusCode: 400, httpVersion: nil, headerFields: nil)
         mockApiManager = MockApiManager(false, withMockData: "{\"fruit\":[{\"type\":\"apple\", \"price\":149, \"weight\":120}]}", mockResposne: mockResposne!)
         
-        let vc = FruitsListViewController()
+        let vc = FruitsListTableViewController()
         let vm = FruitsViewModel.init(apiModule: apiModule, apiManager: mockApiManager!)
         vc.viewModelProtocol = vm
         vc.viewModelProtocol!.getFruitList()

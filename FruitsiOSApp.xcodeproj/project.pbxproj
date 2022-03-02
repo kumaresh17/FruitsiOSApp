@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40186BB827CBFE9E00215EFC /* ExtensionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BB727CBFE9E00215EFC /* ExtensionHelper.swift */; };
-		40186BBA27CC017D00215EFC /* FruitsListViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BB927CC017D00215EFC /* FruitsListViewControllerDataSource.swift */; };
+		40186BBA27CC017D00215EFC /* FruitsListTableViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BB927CC017D00215EFC /* FruitsListTableViewControllerDataSource.swift */; };
 		40186BBD27CC159200215EFC /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BBC27CC159200215EFC /* ActivityIndicator.swift */; };
 		40186BBF27CC166F00215EFC /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BBE27CC166F00215EFC /* AlertViewController.swift */; };
 		40186BC127CC1ECB00215EFC /* FruitsDetailDataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BC027CC1ECB00215EFC /* FruitsDetailDataFormatter.swift */; };
@@ -16,9 +16,10 @@
 		40186BC527CC503500215EFC /* ApiManager+JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BC427CC503500215EFC /* ApiManager+JsonDecoder.swift */; };
 		40186BC727CC509800215EFC /* ApiManager+PrepareRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40186BC627CC509800215EFC /* ApiManager+PrepareRequest.swift */; };
 		4049C80027CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4049C7FF27CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift */; };
+		4049C80227D00A2D002E8833 /* FruitsListViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4049C80127D00A2D002E8833 /* FruitsListViewController+Segue.swift */; };
 		407015D127CB88A60044AB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015D027CB88A60044AB8F /* AppDelegate.swift */; };
 		407015D327CB88A60044AB8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015D227CB88A60044AB8F /* SceneDelegate.swift */; };
-		407015D527CB88A60044AB8F /* FruitsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015D427CB88A60044AB8F /* FruitsListViewController.swift */; };
+		407015D527CB88A60044AB8F /* FruitsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015D427CB88A60044AB8F /* FruitsListTableViewController.swift */; };
 		407015D827CB88A60044AB8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407015D627CB88A60044AB8F /* Main.storyboard */; };
 		407015DA27CB88A70044AB8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407015D927CB88A70044AB8F /* Assets.xcassets */; };
 		407015DD27CB88A70044AB8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407015DB27CB88A70044AB8F /* LaunchScreen.storyboard */; };
@@ -57,7 +58,7 @@
 
 /* Begin PBXFileReference section */
 		40186BB727CBFE9E00215EFC /* ExtensionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHelper.swift; sourceTree = "<group>"; };
-		40186BB927CC017D00215EFC /* FruitsListViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsListViewControllerDataSource.swift; sourceTree = "<group>"; };
+		40186BB927CC017D00215EFC /* FruitsListTableViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsListTableViewControllerDataSource.swift; sourceTree = "<group>"; };
 		40186BBC27CC159200215EFC /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		40186BBE27CC166F00215EFC /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		40186BC027CC1ECB00215EFC /* FruitsDetailDataFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsDetailDataFormatter.swift; sourceTree = "<group>"; };
@@ -65,10 +66,11 @@
 		40186BC427CC503500215EFC /* ApiManager+JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+JsonDecoder.swift"; sourceTree = "<group>"; };
 		40186BC627CC509800215EFC /* ApiManager+PrepareRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+PrepareRequest.swift"; sourceTree = "<group>"; };
 		4049C7FF27CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager_UsagesStatsViewModelTests.swift; sourceTree = "<group>"; };
+		4049C80127D00A2D002E8833 /* FruitsListViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FruitsListViewController+Segue.swift"; sourceTree = "<group>"; };
 		407015CD27CB88A60044AB8F /* FruitsiOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FruitsiOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407015D027CB88A60044AB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		407015D227CB88A60044AB8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		407015D427CB88A60044AB8F /* FruitsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsListViewController.swift; sourceTree = "<group>"; };
+		407015D427CB88A60044AB8F /* FruitsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsListTableViewController.swift; sourceTree = "<group>"; };
 		407015D727CB88A60044AB8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		407015D927CB88A70044AB8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		407015DC27CB88A70044AB8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -194,9 +196,10 @@
 		4070160427CB901A0044AB8F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				407015D427CB88A60044AB8F /* FruitsListViewController.swift */,
+				407015D427CB88A60044AB8F /* FruitsListTableViewController.swift */,
 				4070160127CB896D0044AB8F /* FruitTableViewCell.swift */,
-				40186BB927CC017D00215EFC /* FruitsListViewControllerDataSource.swift */,
+				40186BB927CC017D00215EFC /* FruitsListTableViewControllerDataSource.swift */,
+				4049C80127D00A2D002E8833 /* FruitsListViewController+Segue.swift */,
 				4070161427CB9B4B0044AB8F /* FruitsDetailViewController.swift */,
 			);
 			path = View;
@@ -378,7 +381,7 @@
 				4070160227CB896D0044AB8F /* FruitTableViewCell.swift in Sources */,
 				4070161127CB947D0044AB8F /* NetworkReachabilityManager.swift in Sources */,
 				4070160727CB907C0044AB8F /* FruitsViewModel.swift in Sources */,
-				407015D527CB88A60044AB8F /* FruitsListViewController.swift in Sources */,
+				407015D527CB88A60044AB8F /* FruitsListTableViewController.swift in Sources */,
 				407015D127CB88A60044AB8F /* AppDelegate.swift in Sources */,
 				40186BC127CC1ECB00215EFC /* FruitsDetailDataFormatter.swift in Sources */,
 				4070161327CB988D0044AB8F /* FruitsPayload.swift in Sources */,
@@ -386,9 +389,10 @@
 				4070160F27CB94560044AB8F /* URLSessionProtocol.swift in Sources */,
 				40186BBF27CC166F00215EFC /* AlertViewController.swift in Sources */,
 				4070160927CB90A30044AB8F /* FruitResponseModel.swift in Sources */,
+				4049C80227D00A2D002E8833 /* FruitsListViewController+Segue.swift in Sources */,
 				40186BC527CC503500215EFC /* ApiManager+JsonDecoder.swift in Sources */,
 				4070161727CB9B980044AB8F /* NetworkRequestResponseState.swift in Sources */,
-				40186BBA27CC017D00215EFC /* FruitsListViewControllerDataSource.swift in Sources */,
+				40186BBA27CC017D00215EFC /* FruitsListTableViewControllerDataSource.swift in Sources */,
 				40186BBD27CC159200215EFC /* ActivityIndicator.swift in Sources */,
 				407015D327CB88A60044AB8F /* SceneDelegate.swift in Sources */,
 				4070160D27CB94270044AB8F /* APIManager.swift in Sources */,

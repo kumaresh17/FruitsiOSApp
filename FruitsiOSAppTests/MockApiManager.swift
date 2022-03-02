@@ -44,7 +44,7 @@ class MockApiManager {
 
 extension MockApiManager: APIManagerProtocol {
     
-    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<Int, Error>) -> Void) {
+    func getFruitsStatusInfo(payload: FruitsHTTPPayloadProtocol?, completion: @escaping (Result<String, Error>) -> Void) {
         self.sendRequest(payLoad:payload,completion:completion)
     }
     

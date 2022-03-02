@@ -10,13 +10,13 @@ import UIKit
 
 // MARK: - Table data source delegates
 
-extension FruitsListViewController:UITableViewDataSource {
+extension FruitsListTableViewController {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  self.fruitsModelProtocol?.count ?? 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FruitTableViewCell.cellIdentifier, for: indexPath) as? FruitTableViewCell else {
             fatalError("no cell initialized")
