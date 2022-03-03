@@ -19,7 +19,7 @@ class FruitsList_DetailUITests: XCTestCase {
         XCTAssertTrue(appleCell.exists)
     }
     
-    func test_when_cell_is_tapped_navigate_to_detailscreen_and_selected_fruit_details_exist() {
+    func test_when_cell_is_tapped_navigate_to_detailscreen_and_fruit_details_exist() {
         
         let app = XCUIApplication()
         app.launch()
@@ -65,17 +65,32 @@ class FruitsList_DetailUITests: XCTestCase {
         XCTAssertTrue(appleCell.exists)
     }
     
-    func test_activityindicator_Stop_After_the_tablecell_is_visible() {
+    func test_activityindicator_hide_when_the_tablecell_is_visible() {
         
         let app = XCUIApplication()
         app.launch()
-       
         let inProgressActivityIndicator = app.tables["In progress"].activityIndicators["In progress"]
         let cell = app.tables.cells.containing(.staticText, identifier:"banana").element
         XCTAssertFalse(inProgressActivityIndicator.exists)
         XCTAssertTrue(cell.exists)
+    }
+    
+    // TODO: test_fruit_detail_performance_memory_measure
+    func test_fruit_detail_performance_memory_measure() {
+        let app = XCUIApplication()
+        let appleCell =  app.tables.cells.containing(.staticText, identifier:"apple").element
+        let fruitLabel = app.staticTexts["apple"]
+        let options = XCTMeasureOptions()
+        options.invocationOptions = [.manuallyStart]
+        measure(metrics: [XCTMemoryMetric(application:app)], options: options) {
+            app.launch()
+            startMeasuring()
+            appleCell.tap()
+            XCTAssertTrue(fruitLabel.waitForExistence(timeout: 1))
 
-        
+        }
+        stopMeasuring()
+
     }
     
 }
