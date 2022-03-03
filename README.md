@@ -1,6 +1,6 @@
 **Basic Features:**
 
-a. This is pretty very simple app, on launch of the app it will load the fruits list from an Api. User can select any fruit from the list to navigate to detail screen and see the details of the fruits
+a. This is a pretty very simple app, on launch of the app it will load the fruits list from an Api. User can select any fruit from the list to navigate to detail screen and see the details of the fruits
     •    Price in pounds and pence 
     •    Weight in KG  
 b. The user can be able to invoke a reloading of the fruit api by pull to refresh on the fruit list screen.
@@ -13,7 +13,7 @@ c. The app send usage stats to the server with
 App works on both iPhone and iPad and different orientations
 Minimum iOS deployment target is 14.0
 
-**App demontrate Technical approach of:-**
+**App demonstrates Technical approach of:-**
 a. Code structure and software architecture  - using MVVM CLEAN architecture with SOLID Principle
 b. Combine used to bind VieModel to View 
 d. Unit test cases - Test with Mock Api and response, testing of View Models, UITestCases for list and detail screens and Perfermance XCTMemoryMetric with MSL enabled to capture any regression 
