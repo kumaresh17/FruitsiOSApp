@@ -22,17 +22,18 @@ class FruitsListTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableView.automaticDimension
+        self.navigationItem.title = "Fruits"
         setUpHomeScreen()
     }
     
     private func setUpHomeScreen()  {
-        self.navigationItem.title = "Fruits"
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         ActivityIndicator.showActivityIndicator(view: self.view)
         viewModelProtocol = FruitsViewModel()
-        bindingOfViewWithFruitsViewModel()
         usageStatsViewModel = UsageStatsViewModel()
-        requestFruitListFromFruitsViewModel()
+        bindingOfViewWithFruitsViewModel()
+       requestFruitListFromFruitsViewModel()
+      
     }
     
     private func requestFruitListFromFruitsViewModel () {

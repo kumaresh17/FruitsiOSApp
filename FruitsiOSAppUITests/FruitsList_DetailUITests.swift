@@ -65,6 +65,19 @@ class FruitsList_DetailUITests: XCTestCase {
         XCTAssertTrue(appleCell.exists)
     }
     
+    func test_activityindicator_Stop_After_the_tablecell_is_visible() {
+        
+        let app = XCUIApplication()
+        app.launch()
+       
+        let inProgressActivityIndicator = app.tables["In progress"].activityIndicators["In progress"]
+        let cell = app.tables.cells.containing(.staticText, identifier:"banana").element
+        XCTAssertFalse(inProgressActivityIndicator.exists)
+        XCTAssertTrue(cell.exists)
+
+        
+    }
+    
 }
 
 
