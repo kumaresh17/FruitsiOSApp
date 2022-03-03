@@ -15,7 +15,7 @@ import Combine
 
 @testable import FruitsiOSApp
 
-class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
+class ApiManager_PayloadData_FruitsViewModelTests: XCTestCase,PayLoadFormat {
     
     var mockApiManager:MockApiManager?
     var apiModule:FruitsAPIModuleProtocol?
@@ -34,8 +34,6 @@ class ApiManager_PayloadData_ViewModelTests: XCTestCase,PayLoadFormat {
     }
     
     // MARK: - APIManager, view model Unit testcases with Mock data
-    
-   
     
     func test_mock_apimanager_failure_statuscode_400_fruit_data_response() {
         

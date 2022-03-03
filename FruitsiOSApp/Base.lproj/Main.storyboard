@@ -139,6 +139,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NKA-NA-8gE">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="vx2-A2-HAQ" kind="relationship" relationship="rootViewController" id="CBE-A9-9ff"/>

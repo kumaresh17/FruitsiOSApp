@@ -66,7 +66,7 @@ extension Date {
     static var apiInitiatedStartTime: Date?
     static var viewInitiatedStartTime: Date?
 
-    static func timeViewLoadStarted () -> Void {
+    static func timeWhenViewLoadStarted () -> Void {
         viewInitiatedStartTime = Self()
     }
     

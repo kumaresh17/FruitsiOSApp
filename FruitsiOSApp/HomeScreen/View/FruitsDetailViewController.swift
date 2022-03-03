@@ -35,6 +35,7 @@ class FruitsDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Fruit details"
         validateAndShowFruitDetails()
         /// send usages data for load time from tapping on the cell from list view controller till it show the details screen.
         self.usageStatsViewModel?.processUsageStats(withEventType: FruitsEventType.event_display, error:nil)

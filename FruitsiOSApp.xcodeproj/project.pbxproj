@@ -23,8 +23,8 @@
 		407015D827CB88A60044AB8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407015D627CB88A60044AB8F /* Main.storyboard */; };
 		407015DA27CB88A70044AB8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407015D927CB88A70044AB8F /* Assets.xcassets */; };
 		407015DD27CB88A70044AB8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407015DB27CB88A70044AB8F /* LaunchScreen.storyboard */; };
-		407015E827CB88A80044AB8F /* ApiManager_PayloadData_ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015E727CB88A80044AB8F /* ApiManager_PayloadData_ViewModelTests.swift */; };
-		407015F227CB88A80044AB8F /* FruitsiOSAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015F127CB88A80044AB8F /* FruitsiOSAppUITests.swift */; };
+		407015E827CB88A80044AB8F /* ApiManager_PayloadData_FruitsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015E727CB88A80044AB8F /* ApiManager_PayloadData_FruitsViewModelTests.swift */; };
+		407015F227CB88A80044AB8F /* FruitsList_DetailUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015F127CB88A80044AB8F /* FruitsList_DetailUITests.swift */; };
 		407015F427CB88A80044AB8F /* FruitsiOSAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407015F327CB88A80044AB8F /* FruitsiOSAppUITestsLaunchTests.swift */; };
 		4070160227CB896D0044AB8F /* FruitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070160127CB896D0044AB8F /* FruitTableViewCell.swift */; };
 		4070160727CB907C0044AB8F /* FruitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070160627CB907C0044AB8F /* FruitsViewModel.swift */; };
@@ -76,9 +76,9 @@
 		407015DC27CB88A70044AB8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		407015DE27CB88A70044AB8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		407015E327CB88A80044AB8F /* FruitsiOSAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FruitsiOSAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		407015E727CB88A80044AB8F /* ApiManager_PayloadData_ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager_PayloadData_ViewModelTests.swift; sourceTree = "<group>"; };
+		407015E727CB88A80044AB8F /* ApiManager_PayloadData_FruitsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager_PayloadData_FruitsViewModelTests.swift; sourceTree = "<group>"; };
 		407015ED27CB88A80044AB8F /* FruitsiOSAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FruitsiOSAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		407015F127CB88A80044AB8F /* FruitsiOSAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsiOSAppUITests.swift; sourceTree = "<group>"; };
+		407015F127CB88A80044AB8F /* FruitsList_DetailUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsList_DetailUITests.swift; sourceTree = "<group>"; };
 		407015F327CB88A80044AB8F /* FruitsiOSAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsiOSAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4070160127CB896D0044AB8F /* FruitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitTableViewCell.swift; sourceTree = "<group>"; };
 		4070160627CB907C0044AB8F /* FruitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitsViewModel.swift; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				40186BC227CC21E400215EFC /* MockApiManager.swift */,
-				407015E727CB88A80044AB8F /* ApiManager_PayloadData_ViewModelTests.swift */,
+				407015E727CB88A80044AB8F /* ApiManager_PayloadData_FruitsViewModelTests.swift */,
 				4049C7FF27CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift */,
 				40AFCA2C27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift */,
 			);
@@ -177,7 +177,7 @@
 		407015F027CB88A80044AB8F /* FruitsiOSAppUITests */ = {
 			isa = PBXGroup;
 			children = (
-				407015F127CB88A80044AB8F /* FruitsiOSAppUITests.swift */,
+				407015F127CB88A80044AB8F /* FruitsList_DetailUITests.swift */,
 				407015F327CB88A80044AB8F /* FruitsiOSAppUITestsLaunchTests.swift */,
 			);
 			path = FruitsiOSAppUITests;
@@ -407,7 +407,7 @@
 			files = (
 				40186BC327CC21E400215EFC /* MockApiManager.swift in Sources */,
 				40AFCA2D27CD9A0C008BC90F /* FruitsDetailDataFormatterTests.swift in Sources */,
-				407015E827CB88A80044AB8F /* ApiManager_PayloadData_ViewModelTests.swift in Sources */,
+				407015E827CB88A80044AB8F /* ApiManager_PayloadData_FruitsViewModelTests.swift in Sources */,
 				4049C80027CFB6DF002E8833 /* ApiManager_UsagesStatsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				407015F227CB88A80044AB8F /* FruitsiOSAppUITests.swift in Sources */,
+				407015F227CB88A80044AB8F /* FruitsList_DetailUITests.swift in Sources */,
 				407015F427CB88A80044AB8F /* FruitsiOSAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

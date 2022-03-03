@@ -16,7 +16,7 @@ extension FruitsListTableViewController {
         guard let index = self.tableView.indexPath(for: cell)?.row else { return }
         guard let detailView = segue.destination as? FruitsDetailViewController else { return }
         guard let dataValue = self.fruitsModelProtocol else { return }
-        Date.timeViewLoadStarted()
+        Date.timeWhenViewLoadStarted()
         detailView.fruitModelProtocol = dataValue[index]
     }
 }

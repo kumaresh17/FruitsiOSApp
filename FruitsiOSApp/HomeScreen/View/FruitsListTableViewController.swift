@@ -26,6 +26,7 @@ class FruitsListTableViewController: UITableViewController {
     }
     
     private func setUpHomeScreen()  {
+        self.navigationItem.title = "Fruits"
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         ActivityIndicator.showActivityIndicator(view: self.view)
         viewModelProtocol = FruitsViewModel()
@@ -34,17 +35,17 @@ class FruitsListTableViewController: UITableViewController {
         requestFruitListFromFruitsViewModel()
     }
     
-    @objc private func refresh(sender:AnyObject) {
-        /// Capuring start time for the usage stats to be send when the table reload is completed with response.
-        Date.timeViewLoadStarted()
-        requestFruitListFromFruitsViewModel()
-        self.refreshControl?.endRefreshing()
-    }
-    
     private func requestFruitListFromFruitsViewModel () {
         // This is to pin the time when the api started, to calculate the time taken for the Api to compelete and send usage stats
         Date.timeApiStarted()
         viewModelProtocol?.getFruitList()
+    }
+    
+    @objc private func refresh(sender:AnyObject) {
+        /// Capuring start time for the usage stats to be send when the table reload is completed with response.
+        Date.timeWhenViewLoadStarted()
+        requestFruitListFromFruitsViewModel()
+        self.refreshControl?.endRefreshing()
     }
     
     /// Binding of View with ViewModel here Combine is used
