@@ -16,13 +16,13 @@ Minimum iOS deployment target is 14.0
 **App demontrate Technical approach of:-**
 a. Code structure and software architecture  - using MVVM CLEAN architecture with SOLID Principle
 b. Combine used to bind VieModel to View 
-d. Unit test cases - Test with Mock Api and response, testing of View Models, UITestCases for list and detail screens.
+d. Unit test cases - Test with Mock Api and response, testing of View Models, UITestCases for list and detail screens and Perfermance XCTMemoryMetric with MSL enabled to capture any regression 
 e. Coding best practice - For Modularity, Readability and Scalability , protocol orientated programming, extension, codable, dependency injection for better Testability of the code.
  g. Support dark mode - as all the colors are by default system color.
  
 **Future enhancement**
 a. Dynamic Type Accessibility.
-b. Write performance XCTMeasure test case for XCTMemoryMetric and XCTCPUMetric.
+b. Write more performance XCTMeasure test case for APi load related to XCTMemoryMetric and XCTCPUMetric.
 c. Send stats for application crashes and exceptions.
 d. Improve UI
 

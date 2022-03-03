@@ -75,7 +75,7 @@ class FruitsList_DetailUITests: XCTestCase {
         XCTAssertTrue(cell.exists)
     }
     
-    // TODO: test_fruit_detail_performance_memory_measure
+    // test_fruit_detail_performance_memory_measure
     func test_fruit_detail_performance_memory_measure() {
         let app = XCUIApplication()
         let appleCell =  app.tables.cells.containing(.staticText, identifier:"apple").element
@@ -89,7 +89,6 @@ class FruitsList_DetailUITests: XCTestCase {
             XCTAssertTrue(fruitLabel.waitForExistence(timeout: 1))
 
         }
-        stopMeasuring()
 
     }
     
