@@ -15,7 +15,7 @@ class FruitsList_DetailUITests: XCTestCase {
         app.launch()
         let navTitle =  app.navigationBars["Fruits"].staticTexts["Fruits"]
         XCTAssertTrue(navTitle.exists)
-        let appleCell = app.tables.cells.containing(.staticText, identifier:"apple").element
+        let appleCell = app.tables.cells.element
         XCTAssertTrue(appleCell.exists)
     }
     
@@ -70,7 +70,7 @@ class FruitsList_DetailUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         let inProgressActivityIndicator = app.tables["In progress"].activityIndicators["In progress"]
-        let cell = app.tables.cells.containing(.staticText, identifier:"banana").element
+        let cell = app.tables.cells.element
         XCTAssertFalse(inProgressActivityIndicator.exists)
         XCTAssertTrue(cell.exists)
     }
